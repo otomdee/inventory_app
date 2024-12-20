@@ -7,7 +7,9 @@
   </head>
   <body>
     <div>
-      <span>children page</span>
+      <span>Children page</span>
+      <% if (locals.cards) { %> <% cards.forEach((item) => { %> <%-
+      include('card', {user: item}) %> <% })}; %>
     </div>
   </body>
 </html>
