@@ -6,8 +6,22 @@
     <title>Home</title>
   </head>
   <body>
-    <div>
-      <h1>Welcome to XYZ Clothing App</h1>
+    <div class="main">
+      <div class="heading">
+        <h1>Welcome to XYZ Clothing App</h1>
+        <nav>
+          <ul>
+            <li><a href="/men">MEN</a></li>
+            <li><a href="/women">WOMEN</a></li>
+            <li><a href="/kids">KIDS</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="allItems">
+        <% if (locals.cards) { %> <% cards.forEach((item) => { %> <%-
+        include('card', {user: item}) %> <% })}; %>
+      </div>
     </div>
   </body>
 </html>

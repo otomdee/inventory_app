@@ -2,7 +2,6 @@
 
 require("dotenv").config();
 const { Client } = require("pg");
-const { menQuery, womenQuery, kidsQuery } = require("./inserts.js");
 
 const dbUrl = process.env.DATABASE_PUBLIC_URL;
 const dbName = process.env.PGDATABASE;

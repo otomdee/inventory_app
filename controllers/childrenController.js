@@ -1,7 +1,8 @@
-const kidsRow = require("../db/dbMock.js");
+const { getKids } = require("../db/queries.js");
 
-function childrenController(req, res) {
-  res.render("children", { cards: kidsRow });
+async function childrenController(req, res) {
+  const row = await getKids();
+  res.render("children", { cards: row });
 }
 
 module.exports = childrenController;

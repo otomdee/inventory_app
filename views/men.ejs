@@ -6,8 +6,19 @@
     <title>Men's page</title>
   </head>
   <body>
+    <nav>
+      <ul>
+        <li><a href="/">HOME</a></li>
+        <li><a href="/women">WOMEN</a></li>
+        <li><a href="/kids">KIDS</a></li>
+      </ul>
+    </nav>
     <div>
       <span>Men's Page</span>
+    </div>
+    <div class="menItems">
+      <% if (locals.cards) { %> <% cards.forEach((item) => { %> <%-
+      include('card', {user: item}) %> <% })}; %>
     </div>
   </body>
 </html>

@@ -27,4 +27,38 @@ VALUES
 ('FLEECE CARDIGAN', 19.90, 'https://image.uniqlo.com/UQ/ST3/ca/imagesgoods/472084/item/cagoods_30_472084_3x4.jpg?width=423');
 `;
 
-module.exports = { menQuery, womenQuery, kidsQuery };
+const menTable = `CREATE TABLE men (
+    id SERIAL PRIMARY KEY,
+    clothes_id INT NOT NULL,
+    FOREIGN KEY (clothes_id) REFERENCES clothing (id) ON DELETE CASCADE
+);
+`;
+const womenTable = `CREATE TABLE women (
+    id SERIAL PRIMARY KEY,
+    clothes_id INT NOT NULL,
+    FOREIGN KEY (clothes_id) REFERENCES clothing (id) ON DELETE CASCADE
+);
+`;
+
+const kidsTable = `CREATE TABLE kids (
+    id SERIAL PRIMARY KEY,
+    clothes_id INT NOT NULL,
+    FOREIGN KEY (clothes_id) REFERENCES clothing (id) ON DELETE CASCADE
+);
+`;
+
+const populateRelationalTables = `
+INSERT INTO men (clothes_id)
+VALUES
+(1), (2), (3), (4), (5);
+
+INSERT INTO women (clothes_id)
+VALUES
+(6), (7), (8), (9), (10);
+
+INSERT INTO kids (clothes_id)
+VALUES
+(11), (12), (13), (14), (15);
+`;
+
+module.exports = { populateRelationalTables };
