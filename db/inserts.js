@@ -26,3 +26,5 @@ VALUES
 ('FLEECE FULL-ZIP JACKET', 34.90, 'https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/473354/sub/goods_473354_sub11_3x4.jpg?width=423'),
 ('FLEECE CARDIGAN', 19.90, 'https://image.uniqlo.com/UQ/ST3/ca/imagesgoods/472084/item/cagoods_30_472084_3x4.jpg?width=423');
 `;
+
+module.exports = { menQuery, womenQuery, kidsQuery };

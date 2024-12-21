@@ -2,6 +2,10 @@
 
 require("dotenv").config();
 const { Client } = require("pg");
+const { menQuery, womenQuery, kidsQuery } = require("./inserts.js");
+
+const dbUrl = process.env.DATABASE_PUBLIC_URL;
+const dbName = process.env.PGDATABASE;
 
 const SQL = `
 CREATE TABLE IF NOT EXISTS clothing (
@@ -10,22 +14,31 @@ CREATE TABLE IF NOT EXISTS clothing (
   price DECIMAL(10, 2),
   url TEXT
 );
-
-INSERT INTO clothing (itemname, price, url) 
-VALUES
-  ('DRY-EX UV PROTECTION HALF ZIP T-SHIRT', 39.99, 'https://image.uniqlo.com/UQ/ST3/ca/imagesgoods/472019/item/cagoods_00_472019.jpg?width=750')
 `;
 
-async function main() {
-  console.log("userLog", process.env.POSTGRES_USERNAME);
-  console.log("seeding...");
+async function populateDatabase(query) {
+  //create client
   const client = new Client({
-    connectionString: `postgresql://${process.env.POSTGRES_USERNAME}:${process.env.POSTGRES_PASSWORD}@localhost:5432/top_users`,
+    connectionString: dbUrl,
   });
-  await client.connect();
-  await client.query(SQL);
-  await client.end();
-  console.log("done");
+
+  try {
+    console.log(`Connecting to database at ${dbUrl}...`);
+    await client.connect();
+    console.log(`Connected to database: ${dbName}`);
+    await client.query(query);
+    console.log("Database populated successfully");
+  } catch (err) {
+    console.error("Error populating database:", err);
+  } finally {
+    await client.end();
+    console.log("Database connection closed.");
+  }
 }
 
-main();
+if (!dbUrl || !dbName) {
+  console.error("Please set DB_URL and DB_NAME in environment.");
+  process.exit(1);
+}
+
+//populateDatabase();
