@@ -11,7 +11,7 @@ async function getAllClothes() {
 }
 
 async function getMen() {
-  const { rows } = await dbPool.query(`SELECT itemname, price, url
+  const { rows } = await dbPool.query(`SELECT *
     FROM clothing
     JOIN men ON clothing.id = men.clothes_id;`);
 
@@ -19,7 +19,7 @@ async function getMen() {
 }
 
 async function getWomen() {
-  const { rows } = await dbPool.query(`SELECT itemname, price, url
+  const { rows } = await dbPool.query(`SELECT *
     FROM clothing
     JOIN women ON clothing.id = women.clothes_id;`);
 
@@ -27,11 +27,22 @@ async function getWomen() {
 }
 
 async function getKids() {
-  const { rows } = await dbPool.query(`SELECT itemname, price, url
+  const { rows } = await dbPool.query(`SELECT *
     FROM clothing
     JOIN kids ON clothing.id = kids.clothes_id;`);
 
   return rows;
 }
 
-module.exports = { getAllClothes, getMen, getWomen, getKids };
+async function getItem(id) {
+  const { rows } = await dbPool.query(
+    `
+    SELECT *
+    FROM clothing
+    WHERE id = ${id};
+    `
+  );
+
+  return rows;
+}
+module.exports = { getAllClothes, getMen, getWomen, getKids, getItem };

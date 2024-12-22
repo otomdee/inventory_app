@@ -1,0 +1,4 @@
+.indexNav {
+  display: flex;
+  flex-direction: row;
+}
