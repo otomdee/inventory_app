@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add New Item</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/">HOME</a>
+    </nav>
+    <h1>New Item</h1>
+    <% if (locals.message) { %>
+    <div class="newItemConfirm">
+      <span>New Item Added !</span>
+    </div>
+    <% }%>
+    <form action="/new" method="post">
+      <label for="itemname">Item name :</label>
+      <input type="text" name="itemname" id="itemname" required />
+      <label for="url">Image link :</label>
+      <input type="text" name="url" id="url" required />
+      <label for="price">Item price:</label>
+      <input type="number" name="price" id="price" required />
+      <span>Category :</span>
+      <label for="men">Men</label>
+      <input type="radio" name="category" id="men" value="men" required />
+      <label for="women">Women</label>
+      <input type="radio" name="category" id="women" value="women" />
+      <label for="kids">Kids</label>
+      <input type="radio" name="category" id="kids" value="kids" />
+
+      <button type="submit">SUBMIT</button>
+    </form>
+  </body>
+</html>

@@ -45,4 +45,37 @@ async function getItem(id) {
 
   return rows;
 }
-module.exports = { getAllClothes, getMen, getWomen, getKids, getItem };
+
+async function createItem(itemObj) {
+  await dbPool.query(
+    `
+    INSERT INTO clothing (itemname, price, url) 
+    VALUES 
+    ('${itemObj.itemname}', ${itemObj.price}, '${itemObj.url}');
+    `
+  );
+
+  const { rows } = await dbPool.query(
+    `
+    SELECT id FROM clothing WHERE itemname = '${itemObj.itemname}';`
+  );
+
+  console.log(rows[0].id);
+
+  dbPool.query(
+    `
+    INSERT INTO ${itemObj.category} (clothes_id)
+    VALUES
+    (${rows[0].id});
+    `
+  );
+}
+
+module.exports = {
+  getAllClothes,
+  getMen,
+  getWomen,
+  getKids,
+  getItem,
+  createItem,
+};
