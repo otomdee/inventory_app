@@ -60,13 +60,22 @@ async function createItem(itemObj) {
     SELECT id FROM clothing WHERE itemname = '${itemObj.itemname}';`
   );
 
-  console.log(rows[0].id);
-
   dbPool.query(
     `
     INSERT INTO ${itemObj.category} (clothes_id)
     VALUES
     (${rows[0].id});
+    `
+  );
+}
+
+async function updateItem(updateObj) {
+  await dbPool.query(
+    `
+    UPDATE clothing 
+    SET (url, price) = ('${updateObj.url}', ${updateObj.price})
+    WHERE id = ${updateObj.id}
+    ;
     `
   );
 }
@@ -78,4 +87,5 @@ module.exports = {
   getKids,
   getItem,
   createItem,
+  updateItem,
 };
